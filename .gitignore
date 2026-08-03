@@ -1,5 +1,13 @@
-# Ignore Gradle project-specific cache directory
-.gradle
+# Gradle-Verzeichnisse und Build-Dateien
+.gradle/
+build/
+bin/
 
-# Ignore Gradle build output directory
-build
+# IDE-spezifische Konfigurationen (z. B. VS Code / IntelliJ)
+.vscode/
+.idea/
+*.iml
+
+# Betriebssystem-spezifische Dateien
+.DS_Store
+Thumbs.db
