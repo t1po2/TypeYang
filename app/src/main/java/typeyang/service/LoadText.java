@@ -6,15 +6,16 @@ import java.io.IOException;
 
 public class LoadText {
 
-    private String path;
-    private final String TEXT;
-    private StringBuilder allText; // readed Texxt 
+    private static StringBuilder allText; // readed Texxt 
 
 
-    public LoadText(String path){
+    public LoadText(){
+    }
 
-        this.path = path;
-        try (BufferedReader br = new BufferedReader(new FileReader(this.path))) {
+
+    // loads the Text from the File into the Game 
+    public static String getText(String path){
+        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
 
             String line;
             while ((line = br.readLine())!=null){
@@ -23,19 +24,9 @@ public class LoadText {
         } catch (IOException e){
             System.out.println(e.getMessage()+e.getStackTrace());
         }
+        return allText.toString();
 
-
-
-        TEXT = allText.toString();
+        
     }
-
-
-    private String getText(){
-        return TEXT;
-    }
-
-    
-
-
 
 }
