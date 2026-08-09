@@ -6,8 +6,15 @@
  */
 
 plugins {
-    // Apply the application plugin to add support for building a CLI application in Java.
-    application
+    // Apply the application plugin to add support for building a CLI application in Java. 
+    id("application")
+    id("org.openjfx.javafxplugin") version "0.1.0"
+}
+
+
+javafx {
+    version = "21" // or your target JavaFX version
+    modules = listOf("javafx.controls", "javafx.fxml")
 }
 
 repositories {
@@ -34,7 +41,7 @@ java {
 
 application {
     // Define the main class for the application.
-    mainClass = "typeyang.App"
+    mainClass.set("typeyang.App")
 }
 
 tasks.named<Test>("test") {
