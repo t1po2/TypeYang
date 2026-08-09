@@ -7,16 +7,23 @@ import java.util.EventListener;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import typeyang.engine.TypeEngine;
 
 public class App extends Application implements EventListener{
 
 
+    //String for passing keys to TypeEngine
+    private String keyPressed;
+    //TypeEngine
+    private TypeEngine typeEngine;
 
-    Button selectFileButton;
+
+    //filePath
+    private String filePath = "/mobydick.txt";
+
 
 
     // Added back so the default test file (AppTest.java) can find it
@@ -30,45 +37,30 @@ public class App extends Application implements EventListener{
 
 
         BorderPane layout = new BorderPane(); //layout like in swing Border Pane ahst Containers left right top bottom and big center 
-
         Scene scene = new Scene(layout,1280,960);
 
+        //initiate Engine
+        typeEngine = new TypeEngine(this.filePath);
 
 
-        scene.setOnKeyPressed(new EventHandler<KeyEvent>(){
+        //handles KeyEvent
+        scene.setOnKeyTyped(new EventHandler<KeyEvent>(){
 
             @Override
-            public void handle(KeyEvent event) {
-
-                System.out.println(event.getCode());
+            public void handle(KeyEvent event) {                
                 //works passes Keys pressed into sout
                 //TODO: link eventCodes to TypingEngine
-
-
-            }
-
-
-
-            
+                keyPressed = event.getCharacter();
+                typeEngine.setInputChar(keyPressed);        //passes KeyEvent into typeEngine for CHeckup 
+                System.out.println(keyPressed); //for testing
+            }            
         });
         primaryStage.setScene(scene);
         primaryStage.show();
-
-
-
-
-
-
-
-
-
     } 
 
 
     public static void main(String[] args) {
         launch(args);
-
-
-
     }
 }
