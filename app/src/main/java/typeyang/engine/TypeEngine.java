@@ -15,6 +15,9 @@ public class TypeEngine {
     private LoadText loadText;
     private SessionTracker sessionTracker;
 
+
+    private boolean lock = false ;
+
     public TypeEngine(String filePath) {
         // Create instance for tracking Typing Session
         sessionTracker = new SessionTracker();
@@ -41,6 +44,13 @@ public class TypeEngine {
             return;
         }
         this.inputChar = inputChar;
+        if (lock == false){
+            sessionTracker.startTimer();
+            lock = true;
+        } 
+
+
+
         
         // Trigger the evaluation every time a new character is set
         evaluateTyping();
