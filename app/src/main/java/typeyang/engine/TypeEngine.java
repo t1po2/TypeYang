@@ -20,7 +20,7 @@ public class TypeEngine {
 
     public TypeEngine(String filePath) {
         // Create instance for tracking Typing Session
-        sessionTracker = new SessionTracker();
+        sessionTracker = new SessionTracker();  //TODO pass total char Counter 
         charQ = new ArrayDeque<>();
         loadText = new LoadText(filePath);
         

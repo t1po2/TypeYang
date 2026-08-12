@@ -4,65 +4,56 @@ import java.util.HashMap;
 
 public class SessionTracker {
 
-
     private int totalChar;
-
-    private float startTimer = 0 , currentTime , timeLimit = 30000;
-
+    private long startTimer = 0; 
+    private final long TIME_LIMIT = 30000; // 30 seconds in milliseconds
     private boolean firstKeyPressed = false;
 
     private Counter counter;
-    
 
-    private HashMap<String,Integer> stats;
+    public SessionTracker() {
+        counter = new Counter();
+    }
 
-    public SessionTracker(){
-        
-        while (System.currentTimeMillis() - startTimer < timeLimit){
-
-            counter = new Counter();
-
-
-            if(System.currentTimeMillis() - startTimer <= timeLimit){
-
-                stats = counter.getStats();
-            }
+    public void startTimer() {
+        if (!firstKeyPressed) {
+            startTimer = System.currentTimeMillis();
+            firstKeyPressed = true;
         }
     }
 
-
-
-
-
-
-
-
-
-
-    // Setter
-    public void incrementMistakes(){
-        counter.incrementMistakes();
+    public void incrementMistakes() {
+        if (isWithinTimeLimit()) {
+            counter.incrementMistakes();
+        }
     }
 
-    public void incrementCorrect(){
-        this.incrementCorrect();
+    public void incrementCorrect() {
+        if (isWithinTimeLimit()) {
+            counter.incrementCorrect();
+        }
     }
 
-
-    public void startTimer(){
-        startTimer = System.currentTimeMillis();
+    // Helper method to check if the session is still active
+    private boolean isWithinTimeLimit() {
+        // If the timer hasn't started yet, don't count inputs
+        if (!firstKeyPressed) {
+            return false;
+        }
+        return (System.currentTimeMillis() - startTimer) <= TIME_LIMIT;
     }
-    
 
-    // getters 
+    // Returns stats only if within the 30-second window
+    public HashMap<String, Integer> getStats() {
+        if (isWithinTimeLimit()) {
+            return counter.getStats();
+        } else {
+            // Return empty stats or handle expiration as needed
+            return new HashMap<>(); 
+        }
+    }
 
-
-   
-
-    public int getTotalChar(){
+    public int getTotalChar() {
         return totalChar;
     }
-
-
-
 }
