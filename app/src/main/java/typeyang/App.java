@@ -49,10 +49,9 @@ public class App extends Application implements EventListener{
             @Override
             public void handle(KeyEvent event) {                
                 //works passes Keys pressed into sout
-                //TODO: link eventCodes to TypingEngine
-                keyPressed = event.getCharacter();
+                keyPressed = event.getCharacter();  //TODO getText method is not working but i need KeyString for SPACE et.
                 typeEngine.setInputChar(keyPressed);        //passes KeyEvent into typeEngine for CHeckup 
-                System.out.println(keyPressed); //for testing
+                
             }            
         });
         primaryStage.setScene(scene);

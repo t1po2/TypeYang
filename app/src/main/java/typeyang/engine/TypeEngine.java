@@ -56,6 +56,7 @@ public class TypeEngine {
         evaluateTyping();
     }
     
+    // Method t copmpare expecred and inputet Key 
     private void evaluateTyping() {
         // Guard against typing when the queue is already empty
         if (expectedChar == null) {
@@ -78,5 +79,6 @@ public class TypeEngine {
         } else {
             expectedChar = null; // Reached the end of the text
         }
+        System.out.println(inputChar); //for testing
     }
 }
