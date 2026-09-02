@@ -1,9 +1,5 @@
 package typeyang;
 
-import java.util.EventListener;
-
-
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -31,6 +27,9 @@ public class App extends Application{
             Parent root = FXMLLoader.load(getClass().getResource("/main.fxml"));
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
+            primaryStage.show();
+
+            root.requestFocus(); //sets Focus on the Pane
             
         } catch (Exception e) {
             e.printStackTrace();

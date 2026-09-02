@@ -1,5 +1,17 @@
 package typeyang.service;
 
+import javafx.fxml.FXML;
+import javafx.scene.input.KeyEvent;
+
 public class Controller {
+
+
+
+
+
+    @FXML
+    private void handleKeyPressed(KeyEvent e){
+        System.out.println(e.getCode() + "\n");
+    }
     
 }
