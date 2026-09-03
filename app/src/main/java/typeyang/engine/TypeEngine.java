@@ -6,6 +6,12 @@ import java.util.Queue;
 import typeyang.model.SessionTracker;
 import typeyang.service.LoadText;
 
+
+
+
+// PROTOTYTPE OF TYPEENGINE LOOK AT REWORK OF TYPEENGINE2.JAVA
+
+
 public class TypeEngine {
 
     private String inputChar;
@@ -48,10 +54,6 @@ public class TypeEngine {
             sessionTracker.startTimer();
             lock = true;
         } 
-
-
-
-        
         // Trigger the evaluation every time a new character is set
         evaluateTyping();
     }
