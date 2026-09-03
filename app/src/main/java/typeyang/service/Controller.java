@@ -12,6 +12,10 @@ public class Controller {
     @FXML
     private void handleKeyPressed(KeyEvent e){
         System.out.println(e.getCode() + "\n");
+
+        //should i make a synchronised Datastructure
+        // does it have a delay?
+
     }
     
 }
