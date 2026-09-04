@@ -54,5 +54,5 @@ src/
 4. Run the main Application class (to be added) to launch the UI.
 
 ---
-*Built with ❤️ (and Java) — Work in Progress!*
+*Built with ❤️ (and Java) — Work in Progress!*  
 *Markdown file created with ai*
