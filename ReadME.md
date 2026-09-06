@@ -17,7 +17,7 @@ The project is currently in its early stages of development. The core typing eng
 
 Since the project is heavily under construction, the following features are actively being worked on:
 
-- [ ] **JavaFX UI Integration:** Visualizing the text on screen, advancing the cursor, and coloring characters (e.g., Green for correct, Red for typos, Grey for untyped).
+- [ ] **JavaFX UI Integration:** Visualizing the text on screen, advancing the cursor, and coloring characters (e.g., Green for correct, Red for typos, Grey for untyped {partially done}).
 - [ ] **Backspace / Correction Support:** Transitioning the engine's data structure (from a Queue to an Index-based system) to support correcting mistakes.
 - [ ] **End Screen Analytics:** Calculating and displaying final WPM, raw WPM, and accuracy percentages once the time limit is reached.
 - [ ] **Custom Game Modes:** Adding support for word-count limits (e.g., 10, 25, 50 words) and custom time limits (15s, 60s, 120s).
