@@ -9,6 +9,7 @@ public class SessionTracker {
 
 
     public SessionTracker(){
+        this.mistakes = 0;
     }
     
 
@@ -27,6 +28,10 @@ public class SessionTracker {
             return true;
         }
         return (System.currentTimeMillis() -startTime) <= 30000;
+    }
+
+    public void incrementMistakes(){
+        this.mistakes++;
     }
 
 

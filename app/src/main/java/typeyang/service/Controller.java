@@ -1,5 +1,6 @@
 package typeyang.service;
 
+import javafx.scene.control.Label;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -13,14 +14,16 @@ public class Controller implements Initializable {
     private TypeEngine2 engine;
 
 
+    @FXML
+    Label mainLabel;
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Initialize the engine right when the view is ready
-        this.engine = new TypeEngine2("/text.txt");
+        this.engine = new TypeEngine2();
+        setMainLabel();
         
-
-
-
         //TODO add Text 
         //TODO init SessionTracker for the Timer 
     }
@@ -30,6 +33,7 @@ public class Controller implements Initializable {
 
 
         String input = e.getCharacter();
+        System.out.println(input + "\n");
         
         if (input != null && !input.isEmpty()) {
             engine.handleFirstInput();
@@ -56,5 +60,18 @@ public class Controller implements Initializable {
                 }
             }
         }
+        setMainLabel();
+
     }
+
+    
+    private void setMainLabel(){
+        
+        mainLabel.setText(engine.getMainText());
+
+    }
+
+
+
+
 }

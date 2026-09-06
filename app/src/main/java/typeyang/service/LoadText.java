@@ -1,42 +1,37 @@
 package typeyang.service;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
+import java.util.Random;
 
 public class LoadText {
 
-    private String totalText;
+    private final static String[] WORDS = {"apple", "beach", "chair", "dance", "eagle", "frame", "grape", "house", "image", "juice", "knife", "lemon", "mouse", "nurse", "ocean", "piano", "queen", "river", "snake", "train", "uncle", "voice", "water", "youth", "zebra", "angel", "bread", "clock", "dream", "earth", "flora", "glass", "heart", "ivory", "jewel", "koala", "light", "magic", "night", "onion", "paper", "quiet", "radio", "sugar", "tiger", "usual", "value", "whale", "xenon", "yacht", "accept", "belief", "center", "decide", "energy", "family", "garden", "happen", "island", "jacket", "kennel", "ladder", "market", "notice", "office", "public", "reason", "safety", "travel", "upward", "violent", "wander", "yellow", "zenith", "badger", "candle", "danger", "engine", "fabric", "glance", "hammer", "insect", "jungle", "kitten", "leader", "mother", "needle", "oxygen", "peanut", "rabbit", "saddle", "tablet", "umbrella", "vacuum", "walnut", "xylophone", "yogurt", "zipper", "anchor", "border", "achieve", "bargain", "capture", "damage", "earnest", "foreign", "genuine", "hygiene", "impulse", "jealous", "kingdom", "laundry", "machine", "nervous", "observe", "package", "quality", "realize", "scandal", "twilight", "unusual", "varnish", "weather", "yearning", "zealous", "absence", "bizarre", "caliber", "decline", "eclipse", "fragile", "gradual", "habitat", "idyllic", "justice", "kinetic", "logical", "musical", "nominal", "optimal", "passing", "radical", "seismic", "tactical", "utopian", "vacancy", "walking", "xylograph", "yearning", "ziggurat", "adjacent", "brilliant", "cautious", "dramatic", "emphatic", "familiar", "grateful", "hesitate", "ignorant", "judicial", "kindred", "luminous", "majestic", "negative", "obedient", "peculiar", "quaintly", "rational", "scarcely", "tranquil", "ultimate", "valuable", "wanderer", "xanthic", "youthful", "zoology", "absolute", "bountiful", "colossal", "decisive", "eloquent", "fantastic", "graceful", "harmonic", "implicit", "juvenile", "keyboard", "luxurious", "malignant", "narrative", "objective", "peaceful", "quartile", "resonant", "striking", "towering", "universal", "vanguard", "whatever", "xenogeneic", "abandon", "callback", "database", "eccentric", "feedback", "glassware", "handbook", "inkstand", "jetliner", "kelpfish", "landmark", "mainland", "network", "outpost", "postcard", "quickset", "railroad", "starfish", "teardrop", "upswing", "vanguard", "watchdog", "xenolith", "yardarm", "zookeeper", "aesthetic", "bronchitis", "camouflage", "dandelion", "eucalyptus", "fascinating", "gargantuan", "hemorrhage", "idiosyncrasy", "jurisdiction", "kaleidoscopic", "labyrinthine", "mischievous", "nomenclature", "ophthalmology", "perseverance", "questionnaire", "reconnaissance", "simultaneous", "therapeutic", "ubiquitous", "vacillating", "weathering", "xenotransplant", "zoological"} ;
+    private final Random rand = new Random();
 
-    public LoadText(String resourcePath) {
-        StringBuilder sb = new StringBuilder();
 
-        // Load the file as a resource stream instead of a standard file path
-        try (InputStream is = getClass().getResourceAsStream(resourcePath)) {
-            
-            if (is == null) {
-                throw new IOException("Resource not found: " + resourcePath);
-            }
-            
-            // Wrap the InputStream in a BufferedReader
-            try (BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8))) {
-                String line;
-                while ((line = br.readLine()) != null) {
-                    sb.append(line).append("\n"); // Keeps the line breaks
-                }
-                totalText = sb.toString();
-            }
-            
-        } catch (IOException e) {
-            e.printStackTrace(); 
-            // Fallback to prevent NullPointerException in TypeEngine if loading fails
-            totalText = "Error loading text file.";
-        }
+    public LoadText(){
+
     }
 
     public String getTotalText() {
-        return totalText;
+        
+        StringBuilder sb = new StringBuilder();
+        
+        for (int i = 0; i < WORDS.length; i++){
+            int n = rand.nextInt(WORDS.length);
+            sb.append(WORDS[n]);
+
+            
+            if (i+1 % 6 == 0){
+                sb.append('\n');
+            }
+
+            else if (i < WORDS.length -1){
+                sb.append(" ");
+            }
+
+            
+        }
+
+        return sb.toString();
     }
 }
