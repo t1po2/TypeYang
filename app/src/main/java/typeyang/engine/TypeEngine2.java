@@ -21,7 +21,6 @@ public class TypeEngine2 {
     private int currentIndex=0;
 
 
-    private final Queue<Character> correcCharacters = new ArrayDeque<>();
     private final Queue<Character> charQ = new ArrayDeque<>();
 
     private SessionTracker sessionTracker;
