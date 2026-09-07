@@ -8,7 +8,20 @@ import typeyang.service.LoadText;
 public class TypeEngine2 {
 
 
+    public enum TypeResult {
+        CORRECT,
+        INCORRECT,
+        TIME_LIMIT,
+        NO_CHARS_LEFT;
+    }
+
+
     private String mainText;
+
+    private int currentIndex=0;
+
+
+    private final Queue<Character> correcCharacters = new ArrayDeque<>();
     private final Queue<Character> charQ = new ArrayDeque<>();
 
     private SessionTracker sessionTracker;
@@ -44,39 +57,36 @@ public class TypeEngine2 {
     // 3 = time limit has reached
     // 4 = no Chars left --> might replace iAT with a list of words that are oulled
     // out randomly (basicaly no Queue DS is needed )
-    public int evaluate(char input) {
+    public TypeResult evaluate(char input) {
         if (sessionTracker.isTimeRemaining()) {
-            if (charQ.isEmpty()) {
-                System.out.println("no chars left in Q");
-                return 4;
-            }
 
-            if (charQ.peek() == input) {
-                charQ.poll(); // Match! Remove char from queue
-                return 1;
+
+            if (currentIndex >= mainText.length()) {
+                System.out.println("no chars left in Q");
+                return TypeResult.NO_CHARS_LEFT;
+            }
+            char expectedChar = mainText.charAt(currentIndex);
+
+            if (expectedChar == input) {
+                currentIndex++;
+                return TypeResult.CORRECT;
             } else {
                 sessionTracker.incrementMistakes();
-                return 2; // Typo! Leave in queue (or handle accordingly)
+                return TypeResult.INCORRECT; // Typo! Leave in queue (or handle accordingly)
             }
         }
-        return 3;
+        return TypeResult.TIME_LIMIT;
     }
 
-    // MEthod builds String cia CharQ so i can display it in the mainLabel
-    // method could be unnecessary if only used once for method getRemainingText
-    // if so just put the whole Stringbuilder inside it
-    public void getRemainingText() {
-        StringBuilder sb = new StringBuilder();
+ 
+    public String getRemainingText() {
+    return mainText.substring(currentIndex);
+}
 
-        for (Character c : charQ) {
-            sb.append(c);
-        }
-        mainText = sb.toString();
+    public String getTypedText() {
+    return mainText.substring(0, currentIndex);
     }
 
-    public String getMainText() {
-        getRemainingText();
-        return mainText;
-    }
+    
 
 }
