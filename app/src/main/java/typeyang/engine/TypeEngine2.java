@@ -2,6 +2,8 @@ package typeyang.engine;
 
 import java.util.ArrayDeque;
 import java.util.Queue;
+
+import javafx.scene.control.Label;
 import typeyang.model.SessionTracker;
 import typeyang.service.LoadText;
 
@@ -14,6 +16,11 @@ public class TypeEngine2 {
         TIME_LIMIT,
         NO_CHARS_LEFT;
     }
+    
+    //gotta pass the timer label threw all calsses Damn 
+
+    private Label timer;
+
 
 
     private String mainText;
@@ -25,15 +32,16 @@ public class TypeEngine2 {
 
     private SessionTracker sessionTracker;
 
-    public TypeEngine2() {
-        reset();
+    public TypeEngine2(Label timer) {
+        this.timer = timer;
+        reset(this.timer);
     }
 
     // method reset should create a instance of a SessionTracker so it always starts
     // clean
-    public void reset() {
+    public void reset(Label timer) {
         charQ.clear();
-        this.sessionTracker = new SessionTracker();
+        this.sessionTracker = new SessionTracker(timer);
         LoadText textLoader = new LoadText();
         String text = textLoader.getTotalText();
         this.mainText = text;
@@ -56,6 +64,8 @@ public class TypeEngine2 {
     // 3 = time limit has reached
     // 4 = no Chars left --> might replace iAT with a list of words that are oulled
     // out randomly (basicaly no Queue DS is needed )
+
+
     public TypeResult evaluate(char input) {
         if (sessionTracker.isTimeRemaining()) {
 
@@ -67,7 +77,7 @@ public class TypeEngine2 {
             char expectedChar = mainText.charAt(currentIndex);
 
             if (expectedChar == input) {
-                currentIndex++;
+                currentIndex++; //tthis makes it possible to type another char and color it green
                 return TypeResult.CORRECT;
             } else {
                 sessionTracker.incrementMistakes();

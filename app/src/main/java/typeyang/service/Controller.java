@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -18,10 +19,13 @@ public class Controller implements Initializable {
     @FXML
     TextFlow mainLabel;
 
+    @FXML 
+    Label timer;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Initialize the engine right when the view is ready
-        this.engine = new TypeEngine2();
+        this.engine = new TypeEngine2(timer);
         updateTextFlow();
 
         // TODO add Text
@@ -42,6 +46,20 @@ public class Controller implements Initializable {
 
         if (c >= 32 || c == '\n' || c == '\r') {
             TypeResult condition = engine.evaluate(c);
+
+            switch (condition) {
+                case NO_CHARS_LEFT:
+                    System.out.println("NO_CHARS_LEFT");
+                    break;
+                case CORRECT:
+                    System.out.println("CORRECT INPUT CHAR");
+                    break;
+                case INCORRECT:
+                    System.out.println("INCORRECT INPUT CHAR - Mistakes++");
+                    break;
+                case TIME_LIMIT:
+                    System.out.println("TIME LIMIT HAS BEEN REACHED");
+            }
         }
 
         engine.handleFirstInput();
@@ -61,5 +79,9 @@ public class Controller implements Initializable {
 
         mainLabel.getChildren().addAll(typedTextNode, remainingTextNode);
     }
+
+
+
+    
 
 }
