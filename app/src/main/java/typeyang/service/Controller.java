@@ -21,11 +21,13 @@ public class Controller implements Initializable {
 
     @FXML 
     Label timer;
+    @FXML
+    Label typoLabel;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Initialize the engine right when the view is ready
-        this.engine = new TypeEngine2(timer);
+        this.engine = new TypeEngine2(timer,typoLabel);
         updateTextFlow();
 
         // TODO add Text
@@ -34,7 +36,7 @@ public class Controller implements Initializable {
 
     @FXML
     private void handleKeyTyped(KeyEvent e) {
-
+        engine.handleFirstInput();
         String input = e.getCharacter();
         System.out.println(input + "\n");
 
@@ -62,8 +64,7 @@ public class Controller implements Initializable {
             }
         }
 
-        engine.handleFirstInput();
-
+        
         updateTextFlow();
     }
 

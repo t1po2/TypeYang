@@ -1,7 +1,6 @@
 package typeyang.model;
 
 import javafx.application.Platform;
-import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
 public class SessionTracker implements Runnable {
@@ -13,9 +12,11 @@ public class SessionTracker implements Runnable {
 
     
     private Label timer;
+    private Label typoLabel;
 
-    public SessionTracker(Label timer){
+    public SessionTracker(Label timer, Label typoLabel){
         this.timer = timer;
+        this.typoLabel = typoLabel;
         this.mistakes = 0;
     }
 
@@ -47,6 +48,7 @@ public class SessionTracker implements Runnable {
 
     public void incrementMistakes(){
         this.mistakes++;
+        typoLabel.setText("Typos: " + Integer.toString(mistakes));
     }
 
     @Override 
