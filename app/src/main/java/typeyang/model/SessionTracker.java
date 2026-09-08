@@ -48,7 +48,7 @@ public class SessionTracker implements Runnable {
 
     public void incrementMistakes(){
         this.mistakes++;
-        typoLabel.setText("Typos: " + Integer.toString(mistakes));
+        typoLabel.setText("Typos: " + mistakes);
     }
 
     @Override 
