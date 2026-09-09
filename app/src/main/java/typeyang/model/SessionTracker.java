@@ -9,24 +9,18 @@ public class SessionTracker implements Runnable {
     private static boolean firstInput = false;
     private static long startTime;
 
-
-    
     private Label timer;
     private Label typoLabel;
 
-    public SessionTracker(Label timer, Label typoLabel){
+    public SessionTracker(Label timer, Label typoLabel) {
         this.timer = timer;
         this.typoLabel = typoLabel;
         this.mistakes = 0;
     }
 
+    public void startTimer() {
 
-
-    
-
-    public void startTimer(){
-
-        if (!firstInput){
+        if (!firstInput) {
             startTime = System.currentTimeMillis();
             firstInput = true;
         }
@@ -37,55 +31,51 @@ public class SessionTracker implements Runnable {
 
     }
 
-          
-    public boolean isTimeRemaining(){
+    public boolean isTimeRemaining() {
 
-        if(!firstInput){
+        if (!firstInput) {
             return true;
         }
-        return (System.currentTimeMillis() -startTime) <= 30000;
+        return (System.currentTimeMillis() - startTime) <= 30000;
     }
 
-    public void incrementMistakes(){
+    public void incrementMistakes() {
         this.mistakes++;
         typoLabel.setText("Typos: " + mistakes);
     }
 
-    @Override 
-    public void run(){
+    @Override
+    public void run() {
         while (isTimeRemaining()) {
             long elapsedTime = System.currentTimeMillis() - startTime;
             long remainingSeconds = (30000 - elapsedTime) / 1000;
 
-            if (remainingSeconds < 0 ){
+            if (remainingSeconds < 0) {
                 remainingSeconds = 0;
             }
 
             final String timeString = remainingSeconds + "s";
 
             Platform.runLater(() -> {
-                if (timer != null){
-                  timer.setText(timeString);  
+                if (timer != null) {
+                    timer.setText(timeString);
                 }
             });
 
-
             try {
                 Thread.sleep(100);
-            } catch (InterruptedException e){
+            } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
                 break;
             }
         }
 
         Platform.runLater(() -> {
-            if (timer !=null) {
+            if (timer != null) {
                 timer.setText("0s");
             }
         });
 
     }
 
-    
-    
 }
