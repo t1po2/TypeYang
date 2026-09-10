@@ -25,8 +25,6 @@ public class TypeEngine2 {
 
     private LabelStats labels;
 
-
-
     private String mainText;
 
     private int currentIndex=0;
