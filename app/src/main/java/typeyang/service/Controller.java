@@ -1,6 +1,7 @@
 package typeyang.service;
 
 import java.net.URL;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -25,13 +26,24 @@ public class Controller implements Initializable {
     Label typoLabel;
     @FXML
     Label wpmCounter;
-    
+
+
+    private HashMap<String, Label> labelList = new HashMap<>();
+
+
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Initialize the engine right when the view is ready
-        this.engine = new TypeEngine2(timer,typoLabel);
+
+        labelList.put("timerLabel", timer);
+        labelList.put("typoLabel",typoLabel);
+        labelList.put("wpmLabel",wpmCounter);
+
+        
+
+        this.engine = new TypeEngine2(labelList);
         updateTextFlow();
 
         // TODO add Text

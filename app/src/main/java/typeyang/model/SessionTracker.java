@@ -1,5 +1,7 @@
 package typeyang.model;
 
+import java.util.HashMap;
+
 import javafx.application.Platform;
 import javafx.scene.control.Label;
 
@@ -11,10 +13,14 @@ public class SessionTracker implements Runnable {
 
     private Label timer;
     private Label typoLabel;
+    private Label wpmCounter;
 
-    public SessionTracker(Label timer, Label typoLabel) {
-        this.timer = timer;
-        this.typoLabel = typoLabel;
+    public SessionTracker(HashMap<String, Label> labelList) {
+
+
+        this.typoLabel = labelList.get("typoLabel");
+        this.timer = labelList.get("timerLabel");
+        this.wpmCounter= labelList.get("wpmCounterLabel");
         this.mistakes = 0;
     }
 

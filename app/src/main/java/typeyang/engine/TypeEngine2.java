@@ -1,6 +1,7 @@
 package typeyang.engine;
 
 import java.util.ArrayDeque;
+import java.util.HashMap;
 import java.util.Queue;
 
 import javafx.scene.control.Label;
@@ -19,8 +20,9 @@ public class TypeEngine2 {
     
     //gotta pass the timer label threw all calsses Damn 
 
-    private Label timer;
-    private Label typoLabel;
+   
+
+    private HashMap<String, Label> labelList = new HashMap<>();
 
 
 
@@ -33,17 +35,16 @@ public class TypeEngine2 {
 
     private SessionTracker sessionTracker;
 
-    public TypeEngine2(Label timer, Label typoLabel) {
-        this.timer = timer;
-        this.typoLabel = typoLabel;
-        reset(this.timer,this.typoLabel);
+    public TypeEngine2(HashMap<String,Label> labelList) {
+        this.labelList = labelList;
+        reset(labelList);
     }
 
     // method reset should create a instance of a SessionTracker so it always starts
     // clean
-    public void reset(Label timer, Label typoLabel) {
+    public void reset(HashMap<String, Label> labelList) {
         charQ.clear();
-        this.sessionTracker = new SessionTracker(timer,typoLabel);
+        this.sessionTracker = new SessionTracker(labelList);
         LoadText textLoader = new LoadText();
         String text = textLoader.getTotalText();
         this.mainText = text;
