@@ -29,10 +29,6 @@ public class Controller implements Initializable {
     Label wpmCounter;
 
 
-
-
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Initialize the engine right when the view is ready
