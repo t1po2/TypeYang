@@ -7,6 +7,7 @@ import java.util.Queue;
 import javafx.scene.control.Label;
 import typeyang.model.SessionTracker;
 import typeyang.service.LoadText;
+import typeyang.ui.LabelStats;
 
 public class TypeEngine2 {
 
@@ -22,7 +23,7 @@ public class TypeEngine2 {
 
    
 
-    private HashMap<String, Label> labelList = new HashMap<>();
+    private LabelStats labels;
 
 
 
@@ -35,16 +36,16 @@ public class TypeEngine2 {
 
     private SessionTracker sessionTracker;
 
-    public TypeEngine2(HashMap<String,Label> labelList) {
-        this.labelList = labelList;
-        reset(labelList);
+    public TypeEngine2(LabelStats labels) {
+        this.labels = labels;
+        reset(labels);
     }
 
     // method reset should create a instance of a SessionTracker so it always starts
     // clean
-    public void reset(HashMap<String, Label> labelList) {
+    public void reset(LabelStats labels) {
         charQ.clear();
-        this.sessionTracker = new SessionTracker(labelList);
+        this.sessionTracker = new SessionTracker(labels);
         LoadText textLoader = new LoadText();
         String text = textLoader.getTotalText();
         this.mainText = text;

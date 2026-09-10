@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import javafx.application.Platform;
 import javafx.scene.control.Label;
+import typeyang.ui.LabelStats;
 
 public class SessionTracker implements Runnable {
 
@@ -11,16 +12,11 @@ public class SessionTracker implements Runnable {
     private static boolean firstInput = false;
     private static long startTime;
 
-    private Label timer;
-    private Label typoLabel;
-    private Label wpmCounter;
 
-    public SessionTracker(HashMap<String, Label> labelList) {
+    private LabelStats labels;
 
-
-        this.typoLabel = labelList.get("typoLabel");
-        this.timer = labelList.get("timerLabel");
-        this.wpmCounter= labelList.get("wpmCounterLabel");
+    public SessionTracker(LabelStats labels) {
+        this.labels = labels;
         this.mistakes = 0;
     }
 
@@ -47,7 +43,7 @@ public class SessionTracker implements Runnable {
 
     public void incrementMistakes() {
         this.mistakes++;
-        typoLabel.setText("Typos: " + mistakes);
+        labels.typoLabel().setText("Typos: " + mistakes);
     }
 
     @Override
@@ -63,8 +59,8 @@ public class SessionTracker implements Runnable {
             final String timeString = remainingSeconds + "s";
 
             Platform.runLater(() -> {
-                if (timer != null) {
-                    timer.setText(timeString);
+                if (labels.timer() != null) {
+                    labels.timer().setText(timeString);
                 }
             });
 
@@ -77,8 +73,8 @@ public class SessionTracker implements Runnable {
         }
 
         Platform.runLater(() -> {
-            if (timer != null) {
-                timer.setText("0s");
+            if (labels.timer() != null) {
+                labels.timer().setText("0s");
             }
         });
 

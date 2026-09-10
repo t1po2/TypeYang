@@ -12,6 +12,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import typeyang.engine.TypeEngine2;
 import typeyang.engine.TypeEngine2.TypeResult;
+import typeyang.ui.LabelStats;
 
 public class Controller implements Initializable {
 
@@ -28,7 +29,6 @@ public class Controller implements Initializable {
     Label wpmCounter;
 
 
-    private HashMap<String, Label> labelList = new HashMap<>();
 
 
 
@@ -37,13 +37,9 @@ public class Controller implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         // Initialize the engine right when the view is ready
 
-        labelList.put("timerLabel", timer);
-        labelList.put("typoLabel",typoLabel);
-        labelList.put("wpmLabel",wpmCounter);
+        LabelStats labels = new LabelStats(timer,wpmCounter,typoLabel);
 
-        
-
-        this.engine = new TypeEngine2(labelList);
+        this.engine = new TypeEngine2(labels);
         updateTextFlow();
 
         // TODO add Text
