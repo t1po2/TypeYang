@@ -23,6 +23,10 @@ public class Controller implements Initializable {
     Label timer;
     @FXML
     Label typoLabel;
+    @FXML
+    Label wpmCounter;
+    
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
