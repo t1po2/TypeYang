@@ -13,6 +13,11 @@ public class SessionTracker implements Runnable {
     private static long startTime;
 
 
+    private int totalInput=0;
+
+
+    private static long timeLimit = 30000;
+
     private LabelStats labels;
 
     public SessionTracker(LabelStats labels) {
@@ -38,7 +43,7 @@ public class SessionTracker implements Runnable {
         if (!firstInput) {
             return true;
         }
-        return (System.currentTimeMillis() - startTime) <= 30000;
+        return (System.currentTimeMillis() - startTime) <= timeLimit;
     }
 
     public void incrementMistakes() {
@@ -57,6 +62,7 @@ public class SessionTracker implements Runnable {
             }
 
             final String timeString = remainingSeconds + "s";
+            calculateWPM(elapsedTime);
 
             Platform.runLater(() -> {
                 if (labels.timer() != null) {
@@ -79,5 +85,29 @@ public class SessionTracker implements Runnable {
         });
 
     }
+
+
+    public void DisplayWpmCounter(){
+
+    }
+
+    public void incrementTotalTyped() {
+        totalInput++;
+        }
+
+    public void calculateWPM(long elapsedTime){
+        double words = totalInput / 5.0; 
+    
+        double minutes = elapsedTime / 1000;
+    
+        long wpm = Math.round(words / minutes); 
+    
+        String wpmString = String.valueOf(wpm);
+        System.out.println("WPM: " + wpmString);
+        labels.wpmCounter().setText(wpmString);
+    }
+
+
+    //TODO: wom calc doesnt mae any sense 
 
 }

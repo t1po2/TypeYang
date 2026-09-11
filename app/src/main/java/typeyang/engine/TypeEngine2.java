@@ -24,15 +24,14 @@ public class TypeEngine2 {
    
 
     private LabelStats labels;
-
     private String mainText;
-
     private int currentIndex=0;
 
 
     private final Queue<Character> charQ = new ArrayDeque<>();
 
     private SessionTracker sessionTracker;
+
 
     public TypeEngine2(LabelStats labels) {
         this.labels = labels;
@@ -44,6 +43,9 @@ public class TypeEngine2 {
     public void reset(LabelStats labels) {
         charQ.clear();
         this.sessionTracker = new SessionTracker(labels);
+
+
+
         LoadText textLoader = new LoadText();
         String text = textLoader.getTotalText();
         this.mainText = text;
@@ -80,6 +82,7 @@ public class TypeEngine2 {
 
             if (expectedChar == input) {
                 currentIndex++; //tthis makes it possible to type another char and color it green
+                sessionTracker.incrementTotalTyped();
                 return TypeResult.CORRECT;
             } else {
                 sessionTracker.incrementMistakes();
