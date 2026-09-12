@@ -62,7 +62,9 @@ public class SessionTracker implements Runnable {
             }
 
             final String timeString = remainingSeconds + "s";
-            calculateWPM(elapsedTime);
+            if (remainingSeconds % 2 == 0){
+                calculateWPM(elapsedTime);
+            }
 
             Platform.runLater(() -> {
                 if (labels.timer() != null) {
@@ -96,18 +98,15 @@ public class SessionTracker implements Runnable {
         }
 
     public void calculateWPM(long elapsedTime){
-        double words = totalInput / 5.0; 
-    
-        double minutes = elapsedTime / 1000;
-    
-        long wpm = Math.round(words / minutes); 
-    
-        String wpmString = String.valueOf(wpm);
-        System.out.println("WPM: " + wpmString);
-        labels.wpmCounter().setText(wpmString);
+
+        long wpm = totalInput/(elapsedTime / 60000);
+        
+        labels.wpmCounter().setText(Long.toString(elapsedTime));
+                
     }
 
 
     //TODO: wom calc doesnt mae any sense 
+    // arithmetic exception divide by zero :(
 
 }
