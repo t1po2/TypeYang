@@ -1,7 +1,10 @@
 package typeyang.model;
 
+import java.util.HashMap;
+
 import javafx.application.Platform;
 import javafx.scene.control.Label;
+import typeyang.ui.LabelStats;
 
 public class SessionTracker implements Runnable {
 
@@ -9,12 +12,16 @@ public class SessionTracker implements Runnable {
     private static boolean firstInput = false;
     private static long startTime;
 
-    private Label timer;
-    private Label typoLabel;
 
-    public SessionTracker(Label timer, Label typoLabel) {
-        this.timer = timer;
-        this.typoLabel = typoLabel;
+    private int totalInput=0;
+
+
+    private static long timeLimit = 30000;
+
+    private LabelStats labels;
+
+    public SessionTracker(LabelStats labels) {
+        this.labels = labels;
         this.mistakes = 0;
     }
 
@@ -36,12 +43,12 @@ public class SessionTracker implements Runnable {
         if (!firstInput) {
             return true;
         }
-        return (System.currentTimeMillis() - startTime) <= 30000;
+        return (System.currentTimeMillis() - startTime) <= timeLimit;
     }
 
     public void incrementMistakes() {
         this.mistakes++;
-        typoLabel.setText("Typos: " + mistakes);
+        labels.typoLabel().setText("Typos: " + mistakes);
     }
 
     @Override
@@ -55,10 +62,13 @@ public class SessionTracker implements Runnable {
             }
 
             final String timeString = remainingSeconds + "s";
+            if (remainingSeconds % 2 == 0){
+                calculateWPM(elapsedTime);
+            }
 
             Platform.runLater(() -> {
-                if (timer != null) {
-                    timer.setText(timeString);
+                if (labels.timer() != null) {
+                    labels.timer().setText(timeString);
                 }
             });
 
@@ -71,11 +81,32 @@ public class SessionTracker implements Runnable {
         }
 
         Platform.runLater(() -> {
-            if (timer != null) {
-                timer.setText("0s");
+            if (labels.timer() != null) {
+                labels.timer().setText("0s");
             }
         });
 
     }
+
+
+    public void DisplayWpmCounter(){
+
+    }
+
+    public void incrementTotalTyped() {
+        totalInput++;
+        }
+
+    public void calculateWPM(long elapsedTime){
+
+        long wpm = totalInput/(elapsedTime / 60000);
+        
+        labels.wpmCounter().setText(Long.toString(elapsedTime));
+                
+    }
+
+
+    //TODO: wom calc doesnt mae any sense 
+    // arithmetic exception divide by zero :(
 
 }

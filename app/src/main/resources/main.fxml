@@ -8,6 +8,7 @@
    <children>
       <TextFlow fx:id="mainLabel" layoutX="55.0" layoutY="97.0" prefHeight="246.0" prefWidth="511.0" style="-fx-font-size: 24px; -fx-font-family: 'Courier New';" />
       <Label fx:id="timer" layoutX="55.0" layoutY="63.0" prefHeight="34.0" prefWidth="49.0" text="30s" />
-      <Label fx:id="typoLabel" layoutX="163.0" layoutY="63.0" prefHeight="34.0" prefWidth="61.0" text="typos" />
+      <Label fx:id="typoLabel" layoutX="163.0" layoutY="63.0" prefHeight="34.0" prefWidth="61.0" text="Typos: " />
+      <Label fx:id="wpmCounter" layoutX="256.0" layoutY="72.0" text="WPM: " />
    </children>
 </Pane>

@@ -1,11 +1,13 @@
 package typeyang.engine;
 
 import java.util.ArrayDeque;
+import java.util.HashMap;
 import java.util.Queue;
 
 import javafx.scene.control.Label;
 import typeyang.model.SessionTracker;
 import typeyang.service.LoadText;
+import typeyang.ui.LabelStats;
 
 public class TypeEngine2 {
 
@@ -21,6 +23,7 @@ public class TypeEngine2 {
 
     private Label timer;
     private Label typoLabel;
+    LabelStats labels;
 
 
     private String mainText;
@@ -31,17 +34,20 @@ public class TypeEngine2 {
 
     private SessionTracker sessionTracker;
 
-    public TypeEngine2(Label timer, Label typoLabel) {
-        this.timer = timer;
-        this.typoLabel = typoLabel;
-        reset(this.timer,this.typoLabel);
+
+    public TypeEngine2(LabelStats labels) {
+        this.labels = labels;
+        reset(labels);
     }
 
     // method reset should create a instance of a SessionTracker so it always starts
     // clean
-    public void reset(Label timer, Label typoLabel) {
+    public void reset(LabelStats labels) {
         charQ.clear();
-        this.sessionTracker = new SessionTracker(timer,typoLabel);
+        this.sessionTracker = new SessionTracker(labels);
+
+
+
         LoadText textLoader = new LoadText();
         String text = textLoader.getTotalText();
         this.mainText = text;
@@ -78,6 +84,7 @@ public class TypeEngine2 {
 
             if (expectedChar == input) {
                 currentIndex++; //tthis makes it possible to type another char and color it green
+                sessionTracker.incrementTotalTyped();
                 return TypeResult.CORRECT;
             } else {
                 sessionTracker.incrementMistakes();
