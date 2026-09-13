@@ -23,9 +23,7 @@ public class TypeEngine2 {
     private Label typoLabel;
 
 
-
     private String mainText;
-
     private int currentIndex=0;
 
 
