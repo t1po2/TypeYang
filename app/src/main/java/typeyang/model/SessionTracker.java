@@ -99,10 +99,20 @@ public class SessionTracker implements Runnable {
 
     public void calculateWPM(long elapsedTime){
 
-        long wpm = totalInput/(elapsedTime / 60000);
-        
-        labels.wpmCounter().setText(Long.toString(elapsedTime));
-                
+       if (elapsedTime <= 0 ){
+        return;
+       }
+
+       double minutes = elapsedTime / 60000.0;
+       double words = totalInput / 5.0;
+       
+       int wpm = (int) Math.round(words / minutes);
+      
+       Platform.runLater(() -> {
+            if (labels.wpmCounter() != null){
+                labels.wpmCounter().setText("WPM: " + wpm);
+            }
+       });   
     }
 
 
