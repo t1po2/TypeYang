@@ -11,7 +11,7 @@
       <Label fx:id="typoLabel" layoutX="163.0" layoutY="63.0" prefHeight="34.0" prefWidth="61.0" text="Typos: " />
       <Label fx:id="wpmCounter" layoutX="256.0" layoutY="72.0" text="WPM: " />
       
-      <!-- FIXED: vbarPolicy is now NEVER instead of HIDDEN -->
+      
       <ScrollPane layoutX="55.0" layoutY="97.0" prefHeight="246.0" prefWidth="511.0" fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="NEVER" style="-fx-background-color: transparent; -fx-background: transparent;">
          <content>
             <TextFlow fx:id="mainLabel" maxWidth="511.0" style="-fx-font-size: 24px; -fx-font-family: 'Courier New';" />
