@@ -1,9 +1,7 @@
 package typeyang.model;
 
-import java.util.HashMap;
 
 import javafx.application.Platform;
-import javafx.scene.control.Label;
 import typeyang.ui.LabelStats;
 
 public class SessionTracker implements Runnable {
@@ -52,7 +50,7 @@ public class SessionTracker implements Runnable {
     }
 
     @Override
-    public void run() {
+    public void run(){
         while (isTimeRemaining()) {
             long elapsedTime = System.currentTimeMillis() - startTime;
             long remainingSeconds = (30000 - elapsedTime) / 1000;
@@ -116,7 +114,6 @@ public class SessionTracker implements Runnable {
     }
 
 
-    //TODO: wom calc doesnt mae any sense 
-    // arithmetic exception divide by zero :(
+    
 
 }
