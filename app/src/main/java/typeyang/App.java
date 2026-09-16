@@ -10,6 +10,8 @@ public class App extends Application{
 
 
     
+    Stage primStage;
+    
 
 
     // Added back so the default test file (AppTest.java) can find it
@@ -20,12 +22,19 @@ public class App extends Application{
     @Override
     public void start(Stage primaryStage) {
 
+        this.primStage = primaryStage;
 
         try {
 
 
             Parent root = FXMLLoader.load(getClass().getResource("/main.fxml"));
+            Parent endScene = FXMLLoader.load(getClass().getResource("/endscene"));
+
+
+
             Scene scene = new Scene(root);
+
+
             primaryStage.setScene(scene);
             primaryStage.show();
 
@@ -41,4 +50,7 @@ public class App extends Application{
     public static void main(String[] args) {
         launch(args);
     }
+
+
+    
 }
