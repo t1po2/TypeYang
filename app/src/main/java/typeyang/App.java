@@ -28,16 +28,10 @@ public class App extends Application{
 
 
             Parent root = FXMLLoader.load(getClass().getResource("/main.fxml"));
-            Parent endScene = FXMLLoader.load(getClass().getResource("/endscene"));
-
-
-
             Scene scene = new Scene(root);
-
 
             primaryStage.setScene(scene);
             primaryStage.show();
-
             root.requestFocus(); //sets Focus on the Pane
             
         } catch (Exception e) {

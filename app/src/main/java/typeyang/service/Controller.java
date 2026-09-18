@@ -1,15 +1,23 @@
 package typeyang.service;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.ResourceBundle;
+
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
+import javafx.stage.Stage;
 import typeyang.engine.TypeEngine2;
 import typeyang.engine.TypeEngine2.TypeResult;
 import typeyang.ui.LabelStats;
@@ -20,13 +28,18 @@ public class Controller implements Initializable {
 
     @FXML
     TextFlow mainLabel;
-
     @FXML 
     Label timer;
     @FXML
     Label typoLabel;
     @FXML
     Label wpmCounter;
+
+
+
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
 
 
     @Override
@@ -36,7 +49,11 @@ public class Controller implements Initializable {
         LabelStats labels = new LabelStats(timer,wpmCounter,typoLabel);
 
         this.engine = new TypeEngine2(labels);
-        updateTextFlow();
+
+        if (this.mainLabel != null) {
+            updateTextFlow();
+        }
+        
 
         // TODO add Text
         // TODO init SessionTracker for the Timer
@@ -89,6 +106,27 @@ public class Controller implements Initializable {
         mainLabel.getChildren().addAll(typedTextNode, remainingTextNode);
     }
 
+
+
+
+
+    // https://www.youtube.com/watch?v=hcM-R-YOKkQ
+    public void switchToMain(ActionEvent e) throws IOException{
+        Parent root = FXMLLoader.load(getClass().getResource("/main.fxml"));
+        stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void switchToEnd(ActionEvent e)throws IOException{
+        Parent root = FXMLLoader.load(getClass().getResource("/endscene.fxml"));
+        stage = (Stage)((Node)e.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+
+    }
 
 
     
