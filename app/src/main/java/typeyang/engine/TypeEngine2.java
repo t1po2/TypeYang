@@ -84,23 +84,24 @@ public class TypeEngine2 {
 
             if (expectedChar == input) {
                 currentIndex++; //tthis makes it possible to type another char and color it green
-                sessionTracker.incrementTotalTyped();
+                SessionTracker.incrementCorrect();
                 return TypeResult.CORRECT;
             } else {
                 sessionTracker.incrementMistakes();
                 return TypeResult.INCORRECT; // Typo! Leave in queue (or handle accordingly)
             }
         }
+        //TODO Siwthc scene when time runs out 
         return TypeResult.TIME_LIMIT;
     }
 
  
     public String getRemainingText() {
-    return mainText.substring(currentIndex);
-}
+        return mainText.substring(currentIndex);
+    }
 
     public String getTypedText() {
-    return mainText.substring(0, currentIndex);
+        return mainText.substring(0, currentIndex);
     }
 
     

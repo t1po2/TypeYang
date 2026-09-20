@@ -20,6 +20,7 @@ import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 import typeyang.engine.TypeEngine2;
 import typeyang.engine.TypeEngine2.TypeResult;
+import typeyang.model.SessionTracker;
 import typeyang.ui.LabelStats;
 
 public class Controller implements Initializable {
@@ -62,6 +63,7 @@ public class Controller implements Initializable {
     @FXML
     private void handleKeyTyped(KeyEvent e) {
         engine.handleFirstInput();
+        SessionTracker.incrementTotalTyped();
         String input = e.getCharacter();
         System.out.println(input + "\n");
 
@@ -108,6 +110,10 @@ public class Controller implements Initializable {
 
 
 
+    // temp fix to activate method ???? 
+
+
+   
 
 
     // https://www.youtube.com/watch?v=hcM-R-YOKkQ

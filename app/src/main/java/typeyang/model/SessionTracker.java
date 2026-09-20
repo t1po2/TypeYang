@@ -6,13 +6,14 @@ import typeyang.ui.LabelStats;
 
 public class SessionTracker implements Runnable {
 
-    private int mistakes;
+    private static int mistakes, correct;
+
+    //total chars will be mistakes + corrects ig for now cuz io have object tatoalInput 
+
+    private static int totalInput=0;
+
     private static boolean firstInput = false;
     private static long startTime;
-
-
-    private int totalInput=0;
-
 
     private static long timeLimit = 30000;
 
@@ -20,7 +21,7 @@ public class SessionTracker implements Runnable {
 
     public SessionTracker(LabelStats labels) {
         this.labels = labels;
-        this.mistakes = 0;
+        mistakes = 0;
     }
 
     public void startTimer() {
@@ -44,10 +45,6 @@ public class SessionTracker implements Runnable {
         return (System.currentTimeMillis() - startTime) <= timeLimit;
     }
 
-    public void incrementMistakes() {
-        this.mistakes++;
-        labels.typoLabel().setText("Typos: " + mistakes);
-    }
 
     @Override
     public void run(){
@@ -57,6 +54,7 @@ public class SessionTracker implements Runnable {
 
             if (remainingSeconds < 0) {
                 remainingSeconds = 0;
+
             }
 
             final String timeString = remainingSeconds + "s";
@@ -78,6 +76,8 @@ public class SessionTracker implements Runnable {
             }
         }
 
+
+
         Platform.runLater(() -> {
             if (labels.timer() != null) {
                 labels.timer().setText("0s");
@@ -87,13 +87,25 @@ public class SessionTracker implements Runnable {
     }
 
 
-    public void DisplayWpmCounter(){
-
+    public static void incrementTotalTyped() {
+        totalInput++;
     }
 
-    public void incrementTotalTyped() {
-        totalInput++;
-        }
+    //doesnt need to be statiC cuz it is used locally 
+    public void incrementMistakes() {           
+        mistakes++;
+        labels.typoLabel().setText("Typos: " + mistakes);
+    }
+
+    public static void incrementCorrect(){
+        correct++;
+    }
+
+
+
+
+
+
 
     public void calculateWPM(long elapsedTime){
 
