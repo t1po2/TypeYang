@@ -54,7 +54,8 @@ public class SessionTracker implements Runnable {
 
             if (remainingSeconds < 0) {
                 remainingSeconds = 0;
-
+                Computing.calculateAccuracy(correct, totalInput);
+                //TODO set label of endscene to that return value of that method 
             }
 
             final String timeString = remainingSeconds + "s";
