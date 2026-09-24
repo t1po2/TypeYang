@@ -91,7 +91,8 @@ public class TypeEngine2 {
                 return TypeResult.INCORRECT; // Typo! Leave in queue (or handle accordingly)
             }
         }
-        //TODO Siwthc scene when time runs out 
+        // Siwthc scene when time runs out is handled now by the ConTroller 
+
         return TypeResult.TIME_LIMIT;
     }
 

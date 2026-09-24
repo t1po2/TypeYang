@@ -88,6 +88,7 @@ public class Controller implements Initializable {
                     break;
                 case TIME_LIMIT:
                     System.out.println("TIME LIMIT HAS BEEN REACHED");
+                    switchToEnd();
             }
         }
 
@@ -125,15 +126,21 @@ public class Controller implements Initializable {
         stage.show();
     }
 
-    public void switchToEnd(ActionEvent e)throws IOException{
-        Parent root = FXMLLoader.load(getClass().getResource("/endscene.fxml"));
-        stage = (Stage)((Node)e.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+    public void switchToEnd(){
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/endscene.fxml"));
+            stage = (Stage) mainLabel.getScene().getWindow();   //via mainlabel i get current Window (stage)
+            stage.setScene(new Scene(root));
+            stage.show();     
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("IO Exception. Coudn't load endscene.fxml");
+        }
 
+        
     }
 
+   
 
     
 
