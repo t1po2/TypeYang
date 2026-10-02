@@ -118,6 +118,8 @@ public class Controller implements Initializable {
 
 
     // https://www.youtube.com/watch?v=hcM-R-YOKkQ
+
+    
     public void switchToMain(ActionEvent e) throws IOException{
         Parent root = FXMLLoader.load(getClass().getResource("/main.fxml"));
         stage = (Stage)((Node)e.getSource()).getScene().getWindow();
