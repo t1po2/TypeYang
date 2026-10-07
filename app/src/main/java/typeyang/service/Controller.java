@@ -2,7 +2,6 @@ package typeyang.service;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
@@ -40,7 +39,6 @@ public class Controller implements Initializable {
 
     private Stage stage;
     private Scene scene;
-    private Parent root;
 
 
     @Override
@@ -111,7 +109,10 @@ public class Controller implements Initializable {
 
 
 
-    // temp fix to activate method ???? 
+    public void setRemainingTimeLabel(){
+        
+
+    }
 
 
    
