@@ -1,10 +1,8 @@
 package typeyang.engine;
 
 import java.util.ArrayDeque;
-import java.util.HashMap;
 import java.util.Queue;
 
-import javafx.scene.control.Label;
 import typeyang.model.SessionTracker;
 import typeyang.service.LoadText;
 import typeyang.ui.LabelStats;
@@ -21,8 +19,6 @@ public class TypeEngine2 {
     
     //gotta pass the timer label threw all calsses Damn 
 
-    private Label timer;
-    private Label typoLabel;
     LabelStats labels;
 
 
